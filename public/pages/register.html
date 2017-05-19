@@ -1,0 +1,37 @@
+<h1>Register</h1>
+<p> Register to manage your bill pay reminders. You won't make late payements again!!</p>
+<hr>
+<div class="col-md-4">
+</div>
+<div class="col-md-4">
+    <div class="row form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" ng-model="fName" placeholder="Enter Name">
+    </div>
+    <div class="row form-group">
+         <label for="userName">User Name</label>
+         <input type="text" class="form-control" id="userName" ng-model="userName" placeholder="Enter User Name">
+     </div>
+    <div class="row form-group">
+        <label for="password">Password</label>
+         <input type="password" class="form-control" id="password" ng-model="password" placeholder="Password">  
+    </div>
+    <div class="col-md-4">
+    </div>
+    <div class="form-group" class="col-md-4">
+        <button name="btn_register" class="btn btn-primary" ng-click="register()">Register</button>
+        <button type="button" class="btn btn-default">Cancel</button>
+    </div>
+
+    <div class="col-md-4">
+</div>
+</div>
+<div class="col-md-4">
+</div>
+
+<div class="alert alert-success col-md-12" ng-show="useraddresult==true">
+  <strong>Success!</strong> User <strong>{{fName}}</strong> added succesfully.
+</div>
+<div class="alert alert-danger col-md-12" ng-show="useraddresult!=='' && useraddresult==false">
+  <strong>Failed!</strong> User <strong>{{fName}}</strong> was not added try again.
+</div>
