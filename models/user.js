@@ -4,6 +4,18 @@ mongoose.connect('mongodb://localhost/billbayuserdb');
 mongoose.Promise=require('q').Promise;
 var Schema = mongoose.Schema;
 
+var reminderSchema=new Schema({
+     payee: String,
+      type: String,
+      day:Number,
+      nextReminder: Date,
+      paid:[{
+          year:Number,
+          month: Number,
+          status: Boolean
+      }]
+});
+
 // create a schema
 var userSchema = new Schema({
   name: { type: String, required: true},
@@ -11,7 +23,8 @@ var userSchema = new Schema({
   password: { type: String, required: true },
   admin: Boolean,
   created_at: Date,
-  updated_at: Date
+  updated_at: Date,
+  payReminders:[reminderSchema]
 });
 
 // the schema is useless so far

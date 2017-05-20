@@ -8,9 +8,9 @@ myApp.config(function ($routeProvider) {
             templateUrl: 'pages/register.html',
             controller: 'mainController'
         })
-        .when('/myprofile', {
+        .when('/profile', {
             templateUrl: 'pages/profile.html',
-            controller: 'secondController'
+            controller: 'profileController'
         })
         .when('/login', {
             templateUrl: 'pages/login.html',
@@ -20,6 +20,11 @@ myApp.config(function ($routeProvider) {
             templateUrl: 'pages/landing.html',
             controller: 'landingController'
         })
+        .when('/reminder/add', {
+            templateUrl: 'pages/addreminder.html',
+            controller: 'addReminderController'
+        });
+ 
 
 });
 
@@ -50,10 +55,11 @@ myApp.controller('mainController', ['$scope', '$log', '$http', function ($scope,
 
 }]);
 
-myApp.controller('secondController', ['$scope', '$log','$http', '$window',function ($scope, $log,$http,$window) {
+myApp.controller('profileController', ['$scope', '$log','$http', '$window',function ($scope, $log,$http,$window) {
 
     $scope.name = 'Profile';
     $scope.fName = 'test';
+    $scope.reminders='';
 
 
     $scope.loadData = function () {
@@ -71,6 +77,19 @@ myApp.controller('secondController', ['$scope', '$log','$http', '$window',functi
 
 
     };
+
+    $scope.getReminders=function(){
+         $http.get('/api/reminder').success(function (data, status, headers, config) {
+            console.log(data);
+            console.log("Success::" + status);
+            $scope.reminders=data;
+        }).error(function (data, status, headers, config) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+           // $window.location.href = '/#/login'
+            console.log("Error::" + status);
+        });
+    }
 
 
 }]);
@@ -100,6 +119,34 @@ myApp.controller('logoutController', ['$scope', '$log','$http', '$window',functi
 
 }]);
 
+
+myApp.controller('addReminderController', ['$scope', '$log', '$http', '$window', function ($scope, $log, $http, $window) {
+
+    $scope.payee = 'testPayee';
+    $scope.type = 'Credit'
+    $scope.day = 20;
+    $scope.reminderAddResult='';
+ 
+
+    $scope.add = function () {
+        var reminder = {};
+        reminder.payee = $scope.payee;
+        reminder.type = $scope.type;
+        reminder.day=$scope.day;
+        $http.post('/api/reminder', reminder).success(function (data, status, headers, config) {
+            console.log("Success::" + status);
+            $scope.reminderAddResult=true;
+         }).error(function (data, status, headers, config) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+                        $scope.reminderAddResult=false;
+
+             console.log("Error::" + status);
+        });
+
+    }
+
+}]);
 
 myApp.controller('loginController', ['$scope', '$log', '$http', '$window', function ($scope, $log, $http, $window) {
 
