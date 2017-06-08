@@ -3,7 +3,11 @@
 <hr>
  
 
+
 <table class="table" ng-init="getReminders()">
+    <button type="button" class="btn btn-default btn-sm">
+          <span class="glyphicon glyphicon-plus"></span>Add Reminder
+        </button>
     <thead>
       <tr>
         <th>Payee</th>
@@ -12,11 +16,22 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="r in reminders">
+       <tr reminder-element reminder-object="r" ng-repeat="r in reminders"/> 
+
+      <!--<tr ng-repeat="r in reminders">
         <td>{{r.payee}}</td>
         <td>{{r.type}}</td>
         <td>{{r.day}}</td>
-      </tr>
+        <td>
+            <a href="#">
+            <span class="glyphicon glyphicon-remove"></span>
+            </a>
+            <a href="#">
+            <span class="glyphicon glyphicon-pencil"></span>
+            </a>
+        </td>
+      </tr>-->
+      
        
     </tbody>
   </table>
