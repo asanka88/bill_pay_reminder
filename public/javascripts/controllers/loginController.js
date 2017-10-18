@@ -1,5 +1,5 @@
 
-  angular.module('myApp').controller('loginController', ['$scope', '$log', '$http', '$window', function ($scope, $log, $http, $window) {
+angular.module('myApp').controller('loginController', ['$scope', '$log', '$http', '$window', function ($scope, $log, $http, $window) {
 
     $scope.name = 'Login';
     $scope.userName = ''
